@@ -4,15 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node24 --outdir=dist",
+    "watch:build": "pnpm run build --watch",
+    "watch:server": "nodemon dist/index.js",
+    "watch": "concurrently --kill-others 'pnpm run watch:build' 'pnpm run watch:server'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Rahul Parkar",
   "license": "AGPL-3.0-or-later",
+  "engines": {
+    "node": "24.x"
+  },
   "packageManager": "pnpm@10.26.2",
   "devDependencies": {
     "@total-typescript/tsconfig": "^1.0.4",
     "@types/node": "^24.10.4",
+    "concurrently": "^9.2.1",
+    "esbuild": "^0.27.2",
+    "nodemon": "^3.1.11",
     "typescript": "^5.9.3"
   }
 }
