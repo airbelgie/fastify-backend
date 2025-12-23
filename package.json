@@ -7,6 +7,7 @@
     "@types/node": "^24.10.4",
     "concurrently": "^9.2.1",
     "esbuild": "^0.27.2",
+    "fastify": "^5.6.2",
     "lefthook": "^2.0.12",
     "nodemon": "^3.1.11",
     "typescript": "^5.9.3"
@@ -20,11 +21,12 @@
   "name": "fastify-backend",
   "packageManager": "pnpm@10.26.2",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --target=node24 --outdir=dist",
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node24 --outdir=dist --format=esm --packages=external",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "concurrently --kill-others 'pnpm run watch:build' 'pnpm run watch:server'",
     "watch:build": "pnpm run build --watch",
     "watch:server": "nodemon dist/index.js"
   },
+  "type": "module",
   "version": "1.0.0"
 }

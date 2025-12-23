@@ -22,6 +22,7 @@ FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=builder /app/dist ./
+COPY --from=deps /app/node_modules ./node_modules
 
 EXPOSE 3008
-CMD ["node", "index.js"]
+ENTRYPOINT ["node", "index.js"]
