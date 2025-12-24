@@ -2,7 +2,7 @@ import * as Sentry from "@sentry/node";
 import { nodeProfilingIntegration } from "@sentry/profiling-node";
 
 Sentry.init({
-  dsn: "https://685858fff8791beb83461c7dbf31dd1a@o4510584486428672.ingest.de.sentry.io/4510587244445776",
+  dsn: "https://b0ea5f45369870045092c54476bfd984@o4510584486428672.ingest.de.sentry.io/4510587300347984",
 
   // Send structured logs to Sentry
   enableLogs: true,
