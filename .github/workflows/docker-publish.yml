@@ -94,8 +94,6 @@ jobs:
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
-      - name: Send Sentry Sourcemaps
-        run: pnpx @sentry/wizard@latest -i sourcemaps --saas --org airbelgie-ji --project fastify-backend
   deploy:
     needs: build
     runs-on: ubuntu-latest
