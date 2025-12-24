@@ -27,4 +27,4 @@ jobs:
             echo "--- Removing existing container ---"
             docker rm airbelgie_db 
             echo "--- Starting new container ---"
-            docker run --name airbelgie_db -e POSTGRES_PASSWORD=$INPUT_POSTGRES_PASSWORD -e POSTGRES_USER=$INPUT_POSTGRES_USER -e POSTGRES_DB=$INPUT_POSTGRES_DB -p 5432:5432 -v postgres-data:/var/lib/postgresql/data -d postgres:18
+            docker run --name airbelgie_db -e POSTGRES_PASSWORD=$INPUT_POSTGRES_PASSWORD -e POSTGRES_USER=$INPUT_POSTGRES_USER -e POSTGRES_DB=$INPUT_POSTGRES_DB -p 5432:5432 -v airbelgie_data:/var/lib/postgresql -d postgres:18
