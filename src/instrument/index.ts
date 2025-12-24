@@ -2,6 +2,7 @@ import * as Sentry from "@sentry/node";
 import { nodeProfilingIntegration } from "@sentry/profiling-node";
 
 Sentry.init({
+  debug: true,
   dsn: "https://b0ea5f45369870045092c54476bfd984@o4510584486428672.ingest.de.sentry.io/4510587300347984",
 
   // Send structured logs to Sentry
@@ -15,7 +16,7 @@ Sentry.init({
   // For example, automatic IP address collection on events
   sendDefaultPii: true,
   // Tracing
-  tracesSampleRate: 1.0, //  Capture 100% of the transactions
+  tracesSampleRate: 1.0, //  Capture 100% of the transactions,
 });
 
 // Profiling happens automatically after setting it up with `Sentry.init()`.
