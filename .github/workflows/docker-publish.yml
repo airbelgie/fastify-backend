@@ -24,7 +24,6 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -96,3 +95,24 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH and Deploy to Server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
+            echo "--- Pulling latest Docker image ---"
+            docker pull ghcr.io/airbelgie/fastify-backend:main
+            echo "--- Stopping existing container (if running) ---"
+            docker stop airbelgie_backend 
+            echo "--- Removing existing container ---"
+            docker rm airbelgie_backend 
+            echo "--- Starting new container ---"
+            docker run -d --name airbelgie_backend -p 3008:3008 ghcr.io/airbelgie/fastify-backend:main
