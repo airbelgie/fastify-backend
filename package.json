@@ -2,7 +2,10 @@
   "author": "Rahul Parkar",
   "dependencies": {
     "@sentry/node": "^10.32.1",
-    "@sentry/profiling-node": "^10.32.1"
+    "@sentry/profiling-node": "^10.32.1",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.45.1",
+    "pg": "^8.16.3"
   },
   "description": "",
   "devDependencies": {
@@ -11,7 +14,9 @@
     "@fastify/sensible": "^6.0.4",
     "@total-typescript/tsconfig": "^1.0.4",
     "@types/node": "^24.10.4",
+    "@types/pg": "^8.16.0",
     "concurrently": "^9.2.1",
+    "drizzle-kit": "^0.31.8",
     "esbuild": "^0.27.2",
     "fastify": "^5.6.2",
     "fastify-no-icon": "^7.0.0",
