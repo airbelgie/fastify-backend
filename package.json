@@ -33,7 +33,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "concurrently --kill-others 'pnpm run watch:build' 'pnpm run watch:server'",
     "watch:build": "pnpm run build --watch",
-    "watch:server": "nodemon dist/index.js"
+    "watch:server": "NODE_ENV=local nodemon dist/index.js"
   },
   "type": "module",
   "version": "1.0.0"
