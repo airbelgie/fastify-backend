@@ -115,7 +115,7 @@ jobs:
         env:
           DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.SSH_IP }}:5432/${{ secrets.POSTGRES_DB }}?schema=public
   deploy:
-    needs: build
+    needs: [migrate, build]
     runs-on: ubuntu-latest
     steps:
       - name: SSH and Deploy to Server
