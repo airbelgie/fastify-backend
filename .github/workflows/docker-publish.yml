@@ -114,4 +114,4 @@ jobs:
             echo "--- Removing existing container ---"
             docker rm airbelgie_backend 
             echo "--- Starting new container ---"
-            docker run -d --name airbelgie_backend -p 3008:3008 ghcr.io/airbelgie/fastify-backend:main
+            docker run --restart=always -d --name airbelgie_backend -p 3008:3008 ghcr.io/airbelgie/fastify-backend:main

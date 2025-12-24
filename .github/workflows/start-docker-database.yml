@@ -1,0 +1,30 @@
+name: Start Docker Database
+
+on: workflow_dispatch
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH and Deploy to Server
+        uses: appleboy/ssh-action@v1
+        env:
+          INPUT_POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          INPUT_POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          INPUT_POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+        with:
+          host: ${{ secrets.SSH_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          allenvs: true
+          script: |
+            echo "--- Pulling latest Docker image ---"
+            docker pull postgres:18
+            echo "--- Stopping existing container (if running) ---"
+            docker stop airbelgie_db 
+            echo "--- Removing existing container ---"
+            docker rm airbelgie_db 
+            echo "--- Starting new container ---"
+            docker run --name airbelgie-db -e POSTGRES_PASSWORD=$INPUT_POSTGRES_PASSWORD -e POSTGRES_USER=$INPUT_POSTGRES_USER -e POSTGRES_DB=$INPUT_POSTGRES_DB -p 5432:5432 -v postgres-data:/var/lib/postgresql/data -d postgres:18
