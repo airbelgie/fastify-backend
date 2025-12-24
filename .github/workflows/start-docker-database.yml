@@ -18,7 +18,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          allenvs: true
+          envs: INPUT_POSTGRES_PASSWORD,INPUT_POSTGRES_USER,INPUT_POSTGRES_DB
           script: |
             echo "--- Pulling latest Docker image ---"
             docker pull postgres:18
