@@ -1,8 +1,13 @@
+import "./instrument/index";
+
+import * as Sentry from "@sentry/node";
 import Fastify from "fastify";
 
 const fastify = Fastify({
   logger: true,
 });
+
+Sentry.setupFastifyErrorHandler(fastify);
 
 // Declare a route
 fastify.get("/", (_, reply) => {

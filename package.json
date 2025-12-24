@@ -1,5 +1,9 @@
 {
   "author": "Rahul Parkar",
+  "dependencies": {
+    "@sentry/node": "^10.32.1",
+    "@sentry/profiling-node": "^10.32.1"
+  },
   "description": "",
   "devDependencies": {
     "@biomejs/biome": "2.3.10",
