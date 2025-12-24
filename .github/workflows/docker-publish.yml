@@ -98,6 +98,22 @@ jobs:
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
+  migrate:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Setup Node
+        uses: actions/setup-node@v6
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: true
+      - name: Apply all pending migrations to the database
+        run: pnpm prisma migrate deploy
+        env:
+          DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.SSH_IP }}:5432/${{ secrets.POSTGRES_DB }}?schema=public
   deploy:
     needs: build
     runs-on: ubuntu-latest
