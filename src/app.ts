@@ -1,6 +1,6 @@
 import { join } from "node:path";
 import AutoLoad, { type AutoloadPluginOptions } from "@fastify/autoload";
-import Sentry from "@sentry/node";
+import * as Sentry from "@sentry/node";
 import Fastify from "fastify";
 
 import "./instrument/index";
