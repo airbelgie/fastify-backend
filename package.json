@@ -15,6 +15,7 @@
     "@total-typescript/tsconfig": "^1.0.4",
     "@types/node": "^24.10.4",
     "@types/pg": "^8.16.0",
+    "@types/supertest": "^6.0.3",
     "concurrently": "^9.2.1",
     "drizzle-kit": "^0.31.8",
     "esbuild": "^0.27.2",
@@ -23,7 +24,9 @@
     "fastify-plugin": "^5.1.0",
     "lefthook": "^2.0.12",
     "nodemon": "^3.1.11",
-    "typescript": "^5.9.3"
+    "supertest": "^7.1.4",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.16"
   },
   "engines": {
     "node": "24.x"
@@ -35,7 +38,7 @@
   "packageManager": "pnpm@10.26.2",
   "scripts": {
     "build": "esbuild src/index.ts src/plugins/*.ts src/routes/*.ts --bundle --platform=node --target=node24 --outdir=dist --format=esm --packages=external",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
     "watch": "concurrently --kill-others 'pnpm run watch:build' 'pnpm run watch:server'",
     "watch:build": "pnpm run build --watch",
     "watch:server": "NODE_ENV=local nodemon dist/index.js"
