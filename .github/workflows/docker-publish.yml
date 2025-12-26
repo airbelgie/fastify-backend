@@ -174,4 +174,4 @@ jobs:
             echo "--- Removing existing container ---"
             docker rm airbelgie_backend 
             echo "--- Starting new container ---"
-            docker run --restart=always -d --name airbelgie_backend -e COMMIT_SHA=${{ github.sha }} -e PGPORT=5432 -e PGHOST=localhost -e PGUSER=${{ secrets.POSTGRES_USER }} -e PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }} -e PGDATABASE=${{ secrets.POSTGRES_DB }} -p 3008:3008 ghcr.io/airbelgie/fastify-backend:main
+            docker run --restart=always -d --name airbelgie_backend -e COMMIT_SHA=${{ github.sha }} -e PGPORT=5432 -e PGHOST=airbelgie_db -e PGUSER=${{ secrets.POSTGRES_USER }} -e PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }} -e PGDATABASE=${{ secrets.POSTGRES_DB }} -p 3008:3008 ghcr.io/airbelgie/fastify-backend:main
