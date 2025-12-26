@@ -139,3 +139,9 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 /generated/prisma
+
+# Sentry Config File
+.env.sentry-build-plugin
+
+# Sentry Config File
+.sentryclirc

@@ -1,4 +1,4 @@
-name: Docker
+name: Deploy
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -115,6 +115,25 @@ jobs:
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
+  upload-sourcemap:
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: true
+      - name: Build TS
+        run: pnpm build
+      - name: Upload Sourcemaps
+        run: pnpm sentry:sourcemaps
+
   migrate:
     needs: build
     runs-on: ubuntu-latest
@@ -153,4 +172,4 @@ jobs:
             echo "--- Removing existing container ---"
             docker rm airbelgie_backend 
             echo "--- Starting new container ---"
-            docker run --restart=always -d --name airbelgie_backend -p 3008:3008 ghcr.io/airbelgie/fastify-backend:main
+            docker run --restart=always -d --name airbelgie_backend -e COMMIT_SHA=${{ github.sha }} -p 3008:3008 ghcr.io/airbelgie/fastify-backend:main

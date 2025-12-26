@@ -1,6 +1,8 @@
 {
   "author": "Rahul Parkar",
   "dependencies": {
+    "@sentry/cli": "^2.58.4",
+    "@sentry/esbuild-plugin": "^4.6.1",
     "@sentry/node": "^10.32.1",
     "@sentry/profiling-node": "^10.32.1",
     "dotenv": "^17.2.3",
@@ -37,7 +39,8 @@
   "name": "fastify-backend",
   "packageManager": "pnpm@10.26.2",
   "scripts": {
-    "build": "esbuild src/index.ts src/plugins/*.ts src/routes/*.ts --bundle --platform=node --target=node24 --outdir=dist --format=esm --packages=external",
+    "build": "esbuild src/index.ts src/plugins/*.ts src/routes/*.ts --bundle --platform=node --target=node24 --outdir=dist --format=esm --packages=external --sourcemap",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org airbelgie-ji --project fastify-backend ./dist && sentry-cli sourcemaps upload --org airbelgie-ji --project fastify-backend ./dist",
     "test": "vitest",
     "watch": "concurrently --kill-others 'pnpm run watch:build' 'pnpm run watch:server'",
     "watch:build": "pnpm run build --watch",
