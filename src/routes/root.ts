@@ -1,9 +1,17 @@
 import * as Sentry from "@sentry/node";
 import type { FastifyInstance, FastifyPluginAsync } from "fastify";
+import pg from "pg";
 
 const root: FastifyPluginAsync = async (fastify: FastifyInstance) => {
-  fastify.get("/", (_, reply) => {
-    reply.notFound();
+  fastify.get("/", async (_, reply) => {
+    const { Pool } = pg;
+
+    const pool = new Pool();
+
+    const res = await pool.query("SELECT NOW()");
+    console.log("user:", res.rows[0]);
+
+    return reply.notFound();
   });
 
   fastify.get("/async", async () => {

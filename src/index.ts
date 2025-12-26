@@ -26,6 +26,8 @@ fastify.register(AutoLoad, {
   options: pluginOptions,
 });
 
+console.log(process.env);
+
 // Run the server!
 fastify.listen({ host: "0.0.0.0", port: 3008 }, (err) => {
   if (err) {

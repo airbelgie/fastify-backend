@@ -44,7 +44,7 @@
     "test": "vitest",
     "watch": "concurrently --kill-others 'pnpm run watch:build' 'pnpm run watch:server'",
     "watch:build": "pnpm run build --watch",
-    "watch:server": "NODE_ENV=local nodemon dist/index.js"
+    "watch:server": "NODE_ENV=local nodemon --env-file=.env dist/index.js"
   },
   "type": "module",
   "version": "1.0.0"
