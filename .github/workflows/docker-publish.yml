@@ -118,6 +118,8 @@ jobs:
   upload-sourcemap:
     needs: [build, test]
     runs-on: ubuntu-latest
+    env:
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v6
