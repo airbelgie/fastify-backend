@@ -4,6 +4,8 @@ import { query } from "../db/query";
 
 const root: FastifyPluginAsync = async (fastify: FastifyInstance) => {
   fastify.get("/", async (_, reply) => {
+    console.log("Test");
+    console.log(process.env);
     const res = await query("SELECT NOW()");
     console.log("user:", res.rows[0]);
 
