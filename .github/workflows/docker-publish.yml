@@ -25,7 +25,22 @@ env:
 
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Setup Node
+        uses: actions/setup-node@v6
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: true
+      - name: Run Tests
+        run: pnpm test
+
   build:
+    needs: test
     runs-on: ubuntu-latest
     permissions:
       contents: read
