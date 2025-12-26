@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== "local") {
     // Set sampling rate for profiling - this is evaluated only once per SDK.init call
     profileSessionSampleRate: 1.0,
     // Release
-    release: `v1.0.0-${process.env.COMMIT_SHA}`,
+    release: `1.0.0-${process.env.COMMIT_SHA}`,
     // Setting this option to true will send default PII data to Sentry.
     // For example, automatic IP address collection on events
     sendDefaultPii: true,

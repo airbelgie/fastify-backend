@@ -7,6 +7,6 @@ import fp from "fastify-plugin";
  */
 export default fp(async (fastify) => {
   fastify.addHook("onSend", async (_, reply) => {
-    reply.header("X-API-Version", process.env.COMMIT_SHA);
+    reply.header("X-API-Version", `1.0.0-${process.env.COMMIT_SHA}`);
   });
 });
