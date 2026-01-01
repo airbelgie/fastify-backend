@@ -10,14 +10,6 @@ const fastify = Fastify({
   // logger: true,
 });
 
-/*
-Since fastify-print-routes uses an onRoute hook, you have to either:
-
-* use `await register...`
-* wrap you routes definitions in a plugin
-
-See: https://www.fastify.io/docs/latest/Guides/Migration-Guide-V4/#synchronous-route-definitions
-*/
 await fastify.register(fastifyPrintRoutes);
 
 if (process.env.NODE_ENV !== "local") {

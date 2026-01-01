@@ -1,0 +1,87 @@
+{
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  },
+  "dialect": "postgresql",
+  "enums": {},
+  "id": "34ecf973-01cd-491d-a18a-559ea4728230",
+  "policies": {},
+  "prevId": "6278c226-e79d-4e2e-a07f-d1f7c66462dd",
+  "roles": {},
+  "schemas": {},
+  "sequences": {},
+  "tables": {
+    "public.users": {
+      "checkConstraints": {},
+      "columns": {
+        "created_at": {
+          "default": "now()",
+          "name": "created_at",
+          "notNull": true,
+          "primaryKey": false,
+          "type": "timestamp"
+        },
+        "first_name": {
+          "name": "first_name",
+          "notNull": true,
+          "primaryKey": false,
+          "type": "varchar"
+        },
+        "id": {
+          "identity": {
+            "cache": "1",
+            "cycle": false,
+            "increment": "1",
+            "maxValue": "2147483647",
+            "minValue": "1",
+            "name": "users_id_seq",
+            "schema": "public",
+            "startWith": "1000",
+            "type": "always"
+          },
+          "name": "id",
+          "notNull": true,
+          "primaryKey": true,
+          "type": "integer"
+        },
+        "last_name": {
+          "name": "last_name",
+          "notNull": true,
+          "primaryKey": false,
+          "type": "varchar"
+        },
+        "password": {
+          "name": "password",
+          "notNull": true,
+          "primaryKey": false,
+          "type": "text"
+        },
+        "updated_at": {
+          "default": "now()",
+          "name": "updated_at",
+          "notNull": true,
+          "primaryKey": false,
+          "type": "timestamp"
+        },
+        "username": {
+          "name": "username",
+          "notNull": true,
+          "primaryKey": false,
+          "type": "varchar"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "foreignKeys": {},
+      "indexes": {},
+      "isRLSEnabled": false,
+      "name": "users",
+      "policies": {},
+      "schema": "",
+      "uniqueConstraints": {}
+    }
+  },
+  "version": "7",
+  "views": {}
+}
