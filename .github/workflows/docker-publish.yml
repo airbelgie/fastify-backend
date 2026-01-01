@@ -42,6 +42,7 @@ jobs:
         run: pnpm test
 
   build:
+    if: ${{ github.event_name != 'pull_request' }}
     needs: test
     runs-on: ubuntu-latest
     permissions:
@@ -116,6 +117,7 @@ jobs:
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
   upload-sourcemap:
+    if: ${{ github.event_name != 'pull_request' }}
     needs: [build, test]
     runs-on: ubuntu-latest
     env:
@@ -155,6 +157,7 @@ jobs:
         env:
           DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ secrets.SSH_IP }}:5432/${{ secrets.POSTGRES_DB }}?schema=public
   deploy:
+    if: ${{ github.event_name != 'pull_request' }}
     needs: [migrate, build]
     runs-on: ubuntu-latest
     steps:
@@ -174,4 +177,4 @@ jobs:
             echo "--- Removing existing container ---"
             docker rm airbelgie_backend 
             echo "--- Starting new container ---"
-            docker run --restart=always -d --name airbelgie_backend -e COMMIT_SHA=${{ github.sha }} -e PGPORT=5432 -e PGHOST=127.0.0.1 -e PGUSER=${{ secrets.POSTGRES_USER }} -e PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }} -e PGDATABASE=${{ secrets.POSTGRES_DB }} -p 3008:3008 ghcr.io/airbelgie/fastify-backend:main
+            docker run --restart=always -d --name airbelgie_backend -e COMMIT_SHA=${{ github.sha }} -e PGPORT=5432 -e PGHOST=airbelgie_db -e PGUSER=${{ secrets.POSTGRES_USER }} -e PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }} -e PGDATABASE=${{ secrets.POSTGRES_DB }} --network airbelgie -p 3008:3008 ghcr.io/airbelgie/fastify-backend:main
