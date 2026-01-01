@@ -1,7 +1,7 @@
 {
   "author": "Rahul Parkar",
   "dependencies": {
-    "@sentry/cli": "^2.58.4",
+    "@sentry/cli": "^3.0.1",
     "@sentry/esbuild-plugin": "^4.6.1",
     "@sentry/node": "^10.32.1",
     "@sentry/profiling-node": "^10.32.1",
