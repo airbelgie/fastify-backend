@@ -37,7 +37,7 @@
   "license": "AGPL-3.0-or-later",
   "main": "index.js",
   "name": "fastify-backend",
-  "packageManager": "pnpm@10.26.2",
+  "packageManager": "pnpm@10.27.0",
   "scripts": {
     "build": "esbuild src/index.ts src/plugins/*.ts src/routes/*.ts --bundle --platform=node --target=node24 --outdir=dist --format=esm --packages=external --sourcemap",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org airbelgie-ji --project fastify-backend ./dist && sentry-cli sourcemaps upload --org airbelgie-ji --project fastify-backend ./dist",

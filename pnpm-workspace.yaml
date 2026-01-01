@@ -1,6 +1,7 @@
 onlyBuiltDependencies:
   - '@prisma/engines'
   - '@sentry-internal/node-cpu-profiler'
+  - '@sentry/cli'
   - esbuild
   - lefthook
   - prisma
