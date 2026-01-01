@@ -24,6 +24,7 @@
     "fastify": "^5.6.2",
     "fastify-no-icon": "^7.0.0",
     "fastify-plugin": "^5.1.0",
+    "fastify-print-routes": "^5.0.1",
     "lefthook": "^2.0.13",
     "nodemon": "^3.1.11",
     "supertest": "^7.1.4",
@@ -39,7 +40,7 @@
   "name": "fastify-backend",
   "packageManager": "pnpm@10.27.0",
   "scripts": {
-    "build": "esbuild src/index.ts src/plugins/*.ts src/routes/*.ts --bundle --platform=node --target=node24 --outdir=dist --format=esm --packages=external --sourcemap",
+    "build": "esbuild src/index.ts src/plugins/*.ts src/routes/**/*.ts --bundle --platform=node --target=node24 --outdir=dist --format=esm --packages=external --sourcemap",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org airbelgie-ji --project fastify-backend ./dist && sentry-cli sourcemaps upload --org airbelgie-ji --project fastify-backend ./dist",
     "test": "vitest",
     "watch": "concurrently --kill-others 'pnpm run watch:build' 'pnpm run watch:server'",
