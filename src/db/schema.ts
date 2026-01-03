@@ -7,8 +7,6 @@ import {
 } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  firstName: varchar("first_name").notNull(),
   id: integer("id").primaryKey().generatedAlwaysAsIdentity({
     cache: 1,
     increment: 1,
@@ -16,11 +14,13 @@ export const usersTable = pgTable("users", {
     minValue: 1,
     startWith: 1000,
   }),
+  username: varchar("username").notNull(),
+  firstName: varchar("first_name").notNull(),
   lastName: varchar("last_name").notNull(),
   password: text("password").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
     .notNull()
     .$onUpdateFn(() => new Date()),
-  username: varchar("username").notNull(),
 });
