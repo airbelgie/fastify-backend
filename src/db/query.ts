@@ -1,11 +1,9 @@
 import { Pool } from "pg";
 
-export async function query(query: string) {
+export async function query(query: string, values?: any[]) {
   const pool = new Pool();
 
-  console.log(pool);
-
-  const res = await pool.query(query);
+  const res = await pool.query(query, values);
 
   return res;
 }
