@@ -2,6 +2,7 @@
   "author": "Rahul Parkar",
   "dependencies": {
     "@fastify/auth": "^5.0.4",
+    "@fastify/cors": "^11.2.0",
     "@fastify/type-provider-typebox": "^6.1.0",
     "@sentry/cli": "^3.0.1",
     "@sentry/esbuild-plugin": "^4.6.1",

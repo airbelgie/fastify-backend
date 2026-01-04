@@ -1,5 +1,6 @@
 import { join } from "node:path";
 import AutoLoad, { type AutoloadPluginOptions } from "@fastify/autoload";
+import fastifyCors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import * as Sentry from "@sentry/node";
@@ -10,6 +11,10 @@ import "./instrument/index";
 const fastify = Fastify({
   // logger: true,
 }).withTypeProvider<TypeBoxTypeProvider>();
+
+await fastify.register(fastifyCors, {
+  origin: true,
+});
 
 await fastify.register(fastifyJwt, {
   secret:
