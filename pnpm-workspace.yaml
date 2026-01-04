@@ -2,6 +2,7 @@ onlyBuiltDependencies:
   - '@prisma/engines'
   - '@sentry-internal/node-cpu-profiler'
   - '@sentry/cli'
+  - argon2
   - esbuild
   - lefthook
   - prisma
