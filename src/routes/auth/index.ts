@@ -17,14 +17,14 @@ const auth: FastifyPluginAsyncTypebox = async (fastify) => {
           password: Type.String({
             minLength: 8,
           }),
-          // emailAddress: Type.String({
-          //   format: "email",
-          // }),
+          emailAddress: Type.String({
+            format: "email",
+          }),
         }),
       },
     },
     async (request, reply) => {
-      const { password, firstName, lastName } = request.body;
+      const { password, firstName, lastName, emailAddress } = request.body;
 
       if (password.length < 8) {
         return reply.badRequest("Password not long enough");
@@ -35,7 +35,7 @@ const auth: FastifyPluginAsyncTypebox = async (fastify) => {
         INSERT INTO users(number, first_name, last_name, password, email_address)
         SELECT floor(random() * 9999) as "number", $1 as "first_name", $2 as "last_name", $3 as "password", $4 as "email_address"
         RETURNING *`,
-        [firstName, lastName, password, "test@test.com"],
+        [firstName, lastName, password, emailAddress],
       );
       console.log("user:", res.rows[0]);
     },
