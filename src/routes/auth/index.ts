@@ -1,33 +1,45 @@
-import type {
-  FastifyInstance,
-  FastifyPluginAsync,
-  RequestGenericInterface,
-} from "fastify";
+import type { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
+import { Type } from "typebox";
 import { query } from "../../db/query";
 
-interface SignupRequest extends RequestGenericInterface {
-  Body: {
-    firstName: string;
-    lastName: string;
-    password: string;
-    confirmPassword: string;
-  };
-}
+const auth: FastifyPluginAsyncTypebox = async (fastify) => {
+  fastify.post(
+    "/signup",
+    {
+      schema: {
+        body: Type.Object({
+          firstName: Type.String({
+            minLength: 1,
+          }),
+          lastName: Type.String({
+            minLength: 1,
+          }),
+          password: Type.String({
+            minLength: 8,
+          }),
+          // emailAddress: Type.String({
+          //   format: "email",
+          // }),
+        }),
+      },
+    },
+    async (request, reply) => {
+      const { password, firstName, lastName } = request.body;
 
-const auth: FastifyPluginAsync = async (fastify: FastifyInstance) => {
-  fastify.post<SignupRequest>("/signup", async (request, reply) => {
-    const { password, firstName, lastName } = request.body;
+      if (password.length < 8) {
+        return reply.badRequest("Password not long enough");
+      }
 
-    if (password.length < 8) {
-      return reply.badRequest("Password not long enough");
-    }
-
-    const res = await query(
-      "INSERT INTO users(username, first_name, last_name, password) VALUES ($1, $2, $3, $4) RETURNING *",
-      ["BLG001", firstName, lastName, password],
-    );
-    console.log("user:", res.rows[0]);
-  });
+      const res = await query(
+        `
+        INSERT INTO users(number, first_name, last_name, password, email_address)
+        SELECT floor(random() * 9999) as "number", $1 as "first_name", $2 as "last_name", $3 as "password", $4 as "email_address"
+        RETURNING *`,
+        [firstName, lastName, password, "test@test.com"],
+      );
+      console.log("user:", res.rows[0]);
+    },
+  );
 };
 
 export default auth;

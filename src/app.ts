@@ -1,5 +1,6 @@
 import { join } from "node:path";
 import AutoLoad, { type AutoloadPluginOptions } from "@fastify/autoload";
+import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import * as Sentry from "@sentry/node";
 import Fastify from "fastify";
 import fastifyPrintRoutes from "fastify-print-routes";
@@ -8,7 +9,7 @@ import "./instrument/index";
 
 const fastify = Fastify({
   // logger: true,
-});
+}).withTypeProvider<TypeBoxTypeProvider>();
 
 await fastify.register(fastifyPrintRoutes);
 
