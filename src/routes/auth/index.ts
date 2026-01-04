@@ -1,7 +1,10 @@
 import type { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
-import { hash, verify } from "argon2";
 import { Type } from "typebox";
-import { query } from "../../db/query";
+import {
+  checkUserLogin,
+  createAccessToken,
+  createUser,
+} from "../../services/authService";
 
 const auth: FastifyPluginAsyncTypebox = async (fastify) => {
   fastify.post(
@@ -44,15 +47,12 @@ const auth: FastifyPluginAsyncTypebox = async (fastify) => {
         return reply.badRequest("Password does not match confirmation");
       }
 
-      const encryptedPassword = await hash(password);
-
-      const res = await query(
-        `
-        INSERT INTO users(number, first_name, last_name, password, email_address)
-        SELECT floor(random() * 9999) as "number", $1 as "first_name", $2 as "last_name", $3 as "password", $4 as "email_address"
-        RETURNING *`,
-        [firstName, lastName, encryptedPassword, emailAddress],
-      );
+      const res = await createUser({
+        firstName,
+        lastName,
+        password,
+        emailAddress,
+      });
       console.log("user:", res.rows[0]);
     },
   );
@@ -74,27 +74,22 @@ const auth: FastifyPluginAsyncTypebox = async (fastify) => {
     async (request, reply) => {
       const { password, emailAddress } = request.body;
 
-      const userQuery = await query(
-        `SELECT password FROM users WHERE email_address = $1`,
-        [emailAddress],
-      );
+      try {
+        const passwordVerification = await checkUserLogin(
+          emailAddress,
+          password,
+        );
 
-      if (userQuery.rowCount !== 1) {
+        if (passwordVerification) {
+          return {
+            accessToken: fastify.jwt.sign(createAccessToken(emailAddress)),
+          };
+        }
+      } catch {
         reply.badRequest("Failure");
       }
 
-      const passwordVerification = await verify(
-        userQuery.rows[0].password,
-        password,
-      );
-
-      if (passwordVerification) {
-        return {
-          message: "ok",
-        };
-      }
-
-      reply.badRequest("Failure");
+      reply.badRequest("Something bad happened");
     },
   );
 };
