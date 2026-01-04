@@ -23,6 +23,7 @@
     "@types/node": "^24.10.4",
     "@types/pg": "^8.16.0",
     "@types/supertest": "^6.0.3",
+    "@vitest/ui": "4.0.16",
     "concurrently": "^9.2.1",
     "drizzle-kit": "^0.31.8",
     "esbuild": "^0.27.2",

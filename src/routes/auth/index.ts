@@ -86,10 +86,10 @@ const auth: FastifyPluginAsyncTypebox = async (fastify) => {
           };
         }
       } catch {
-        reply.badRequest("Failure");
+        return reply.badRequest("Failure");
       }
 
-      reply.badRequest("Something bad happened");
+      return reply.badRequest("Something bad happened");
     },
   );
 

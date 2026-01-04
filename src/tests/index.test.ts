@@ -1,6 +1,6 @@
 import supertest from "supertest";
 import { afterAll, expect, test } from "vitest";
-import app from "./app";
+import app from "../app";
 
 test("with HTTP injection", async () => {
   const response = await app.inject({
