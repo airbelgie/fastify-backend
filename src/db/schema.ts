@@ -15,7 +15,7 @@ export const usersTable = pgTable("users", {
     startWith: 1000,
   }),
   number: integer("number").notNull().unique(),
-  email: varchar("email_address").notNull(),
+  email: varchar("email_address").notNull().unique(),
   firstName: varchar("first_name").notNull(),
   lastName: varchar("last_name").notNull(),
   password: text("password").notNull(),
