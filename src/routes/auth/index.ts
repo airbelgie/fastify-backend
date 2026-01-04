@@ -92,6 +92,16 @@ const auth: FastifyPluginAsyncTypebox = async (fastify) => {
       reply.badRequest("Something bad happened");
     },
   );
+
+  fastify.get(
+    "/test",
+    {
+      preHandler: [fastify.authenticate],
+    },
+    (request) => {
+      return request.user;
+    },
+  );
 };
 
 export default auth;
