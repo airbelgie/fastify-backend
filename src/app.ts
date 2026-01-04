@@ -1,6 +1,6 @@
 import { join } from "node:path";
 import AutoLoad, { type AutoloadPluginOptions } from "@fastify/autoload";
-import fastifyJwt, { type FastifyJWT } from "@fastify/jwt";
+import fastifyJwt from "@fastify/jwt";
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import * as Sentry from "@sentry/node";
 import Fastify, { type FastifyReply, type FastifyRequest } from "fastify";
