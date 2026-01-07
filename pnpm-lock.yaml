@@ -16,7 +16,7 @@ importers:
         version: 11.2.0
       '@fastify/type-provider-typebox':
         specifier: ^6.1.0
-        version: 6.1.0(typebox@1.0.73)
+        version: 6.1.0(typebox@1.0.74)
       '@sentry/cli':
         specifier: ^3.0.1
         version: 3.0.1
@@ -42,8 +42,8 @@ importers:
         specifier: ^8.16.3
         version: 8.16.3
       typebox:
-        specifier: ^1.0.73
-        version: 1.0.73
+        specifier: ^1.0.74
+        version: 1.0.74
     devDependencies:
       '@biomejs/biome':
         specifier: 2.3.11
@@ -2487,8 +2487,8 @@ packages:
     resolution: {integrity: sha512-OZs6gsjF4vMp32qrCbiVSkrFmXtG/AZhY3t0iAMrMBiAZyV9oALtXO8hsrHbMXF9x6L3grlFuwW2oAz7cav+Gw==}
     engines: {node: '>= 0.6'}
 
-  typebox@1.0.73:
-    resolution: {integrity: sha512-hZSgYMjem+50YuTZzw3XWKyxkDjixapRIAoKPr2ugrpssEwwWzSeowZufiOQNYefnYFtf9KUtYdcnNSj6ZXaSQ==}
+  typebox@1.0.74:
+    resolution: {integrity: sha512-HJuFc2ukVPMOE8SWKv8kHPDnluj4PSfbxBWcg9fw/Pktn7ZVxm+0EB3rk4w2mQ1yoBIqUkMDsu8u6Qu0mqqeNg==}
 
   typescript@5.9.3:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
@@ -3092,9 +3092,9 @@ snapshots:
       type-is: 2.0.1
       vary: 1.1.2
 
-  '@fastify/type-provider-typebox@6.1.0(typebox@1.0.73)':
+  '@fastify/type-provider-typebox@6.1.0(typebox@1.0.74)':
     dependencies:
-      typebox: 1.0.73
+      typebox: 1.0.74
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -4876,7 +4876,7 @@ snapshots:
       media-typer: 1.1.0
       mime-types: 3.0.2
 
-  typebox@1.0.73: {}
+  typebox@1.0.74: {}
 
   typescript@5.9.3: {}
 
